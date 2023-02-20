@@ -4,28 +4,16 @@
 #include "../include/Personal.h"
 
 // We use the scope operator ::
-Personal::Personal() {
-    name = "";
-    personalNumber = 0;
-    salary = 1800;
+Personal::Personal(): name(""), personalNumber(0), salary(1800) {
 }
 
-Personal::Personal(std::string name) {
-    this->name = name;
-    this->personalNumber = 0;
-    this->salary = 0;
+Personal::Personal(std::string name): name(name), personalNumber(0), salary(0) {
 }
 
-Personal::Personal(std::string name, unsigned int personalNumber) {
-    this->name = name;
-    this->personalNumber = personalNumber;
-    this->salary = 0;
+Personal::Personal(std::string name, unsigned int personalNumber): name(name), personalNumber(personalNumber), salary(0) {
 }
 
-Personal::Personal(std::string name, unsigned int personalNumber, unsigned int salary) {
-    this->name = name;
-    this->personalNumber = personalNumber;
-    this->salary = salary;
+Personal::Personal(std::string name, unsigned int personalNumber, unsigned int salary): name(name), personalNumber(personalNumber), salary(salary) {
 }
 
 const std::string &Personal::getName() const {
