@@ -17,7 +17,7 @@ enable_testing()
 include(GoogleTest)
 
 set(HEADERS include/Personal.h)
-set(SOURCES )
+set(SOURCES src/Personal.cpp)
 set(TESTS test/PersonalTest.cpp)
 add_executable(Chapter7Test ${HEADERS} ${SOURCES} ${TESTS})
 target_link_libraries(Chapter7Test GTest::gtest_main GTest::gmock)

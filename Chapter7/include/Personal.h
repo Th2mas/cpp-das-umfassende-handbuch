@@ -7,22 +7,22 @@
 
 class Personal {
     std::string name;
-    unsigned int personalNumber{0};
-    unsigned int salary{1800};
+    unsigned int personalNumber;
+    unsigned int salary;
 public:
-    Personal() {}
+    Personal();
 
-    const std::string &getName() const {
-        return name;
-    }
+    Personal(std::string name);
 
-    unsigned int getPersonalNumber() const {
-        return personalNumber;
-    }
+    Personal(std::string name, unsigned int personalNumber);
 
-    unsigned int getSalary() const {
-        return salary;
-    }
+    Personal(std::string name, unsigned int personalNumber, unsigned int salary);
+
+    const std::string &getName() const;
+
+    unsigned int getPersonalNumber() const;
+
+    unsigned int getSalary() const;
 };
 
 #endif //CHAPTER7_PERSONAL_H
