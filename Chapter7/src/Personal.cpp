@@ -4,20 +4,21 @@
 #include "../include/Personal.h"
 
 // We use the scope operator ::
-Personal::Personal() : Personal("", 0, 1800) {
+Personal::Personal() : Personal("", -1, 1800) {
+    personalNumber = 0;
 }
 
 // Without the element initializer, 'name' would first be an empty string (every string is first initialized with "")
 // and only then we would pass the actual param -> more efficient
 // Only with an element initializer it is possible to "instantiate" a const variable
-Personal::Personal(std::string name) : Personal(name, 0, 0) {
+Personal::Personal(std::string name) : Personal(name, 0, 1800) {
 }
 
-Personal::Personal(std::string name, unsigned int personalNumber) : Personal(name, personalNumber, 0) {
+Personal::Personal(std::string name, unsigned int personalNumber) : Personal(name, personalNumber, 1800) {
 }
 
-Personal::Personal(std::string name, unsigned int personalNumber, unsigned int salary) :
-        name(name), personalNumber(personalNumber), salary(salary) {
+Personal::Personal(std::string name, unsigned int personalNumber, unsigned int salary)
+        : name(name), personalNumber(personalNumber), salary(salary) {
 }
 
 const std::string &Personal::getName() const {
