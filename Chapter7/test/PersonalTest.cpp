@@ -66,3 +66,49 @@ TEST(Personal, DefaultCopyConstructorWorks) {
     expectPersonalEquals(defaultPersonal, copyPersonal2);
     expectPersonalEquals(copyPersonal, copyPersonal2);
 }
+
+TEST(Personal, ShowMoveConstructorOperation) {
+    // Arrange
+    std::string expectedName = "Batman";
+    unsigned int expectedPersonalNumber = 100488;
+    unsigned int expectedSalary = 2200;
+
+    Personal person01{expectedName, expectedPersonalNumber, expectedSalary};
+
+    // Act
+    Personal person02 = std::move(person01);
+
+    // Assert
+    expectPersonalContains(person02, {expectedName, expectedPersonalNumber, expectedSalary});
+
+    // Default value of a string (which is an object) is an empty string, the rest (primitives) is not moved! This is the default implementation!
+    EXPECT_EQ(person01.getName(), "");
+    EXPECT_EQ(person01.getPersonalNumber(), expectedPersonalNumber);
+    EXPECT_EQ(person01.getSalary(), expectedSalary);
+}
+
+TEST(Personal, AvoidImplicitConversion) {
+    // Arrange
+    const char name[] = "Batman";
+
+    // Act
+    Personal person(name);  // should work without another constructor which accepts C strings instead of std::string
+
+    // Even if CLion complains that there is "no viable conversion from const char[] to Personal",
+    // the following two lines work when using implicit conversion
+    // To avoid this, we use the "explicit" keyword to forbid this
+    Personal person2 = name;
+    Personal person3 = "Superman";
+
+    // Assert
+    EXPECT_EQ(person.getName(), name);
+    EXPECT_EQ(person2.getName(), name);
+    EXPECT_EQ(person3.getName(), "Superman");
+}
+
+TEST(Personal, ShowingDifferenceBetweenNormalConstructorAndUnifiedInitializationList) {
+    GTEST_SKIP();
+    Personal person1("Batman", 100.48, 1000);   // we pass a double to personalNumber (uint) -> gets implicitly casted
+    // Personal person2{"Batman", 100.48, 1000};   // when passing a double, we get an error
+    Personal person2{"Batman", static_cast<unsigned int>(100.48), 1000};    // We need to cast explicitly
+}

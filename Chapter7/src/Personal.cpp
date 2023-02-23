@@ -14,6 +14,8 @@ Personal::Personal() : Personal("", -1, 1800) {
 Personal::Personal(std::string name) : Personal(name, 0, 1800) {
 }
 
+// Personal::Personal(const char* name) : Personal(name, 0, 1800) {}
+
 Personal::Personal(std::string name, unsigned int personalNumber) : Personal(name, personalNumber, 1800) {
 }
 

@@ -15,19 +15,37 @@ public:
     Personal();
 
     Personal(std::string name);
+    // explicit Personal(std::string name);
+
+    // Personal(const char* name);  // if we want to convert our argument to another type, we might create a conversion constructor (in this case not needed, C strings are also valid C++ strings)
 
     Personal(std::string name, unsigned int personalNumber);
 
     Personal(std::string name, unsigned int personalNumber, unsigned int salary);
 
     /*
-     * The compiler basically creates the following copy-constructor per default
+    // The compiler basically creates the following copy-constructor per default
+    // If the parameter is marked with "const Personal&", this means that we have a reference to a const/immutable Personal
     Personal(const Personal& p) {
         name = p.name;
         personalNumber = p.personalNumber;
         salary = p.salary;
     }
      */
+
+    /*
+    // The compiler basically creates the following move-constructor per default
+    Personal(Personal &&p) {
+        name = p.name;
+        p.name = "";
+        // rest (the primitive data types) are omitted -> we might opt for our own implementation!
+    }
+    // If we write our own move-constructor, we might delete the option for a copy-constructor!
+    Personal(const Personal &p) = delete;
+     */
+
+    // In a move constructor, the parameter must not be const! We need to "take away" the arguments data,
+    // so that it doesn't contain any (or only partially) data
 
     const std::string &getName() const;
 
