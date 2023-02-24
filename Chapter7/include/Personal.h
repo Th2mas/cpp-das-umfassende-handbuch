@@ -7,6 +7,14 @@
 // The Big Three: If you ever need to write a copy-constructor, an assignment operator or a destructor, you should always
 // write the other two as well
 
+static const unsigned int GG = 1900;
+
+struct PersonalStruct {
+    int publicInt;
+private:
+    int privateInt;
+};
+
 class Personal {
     std::string name;
     unsigned int personalNumber;
@@ -23,6 +31,9 @@ public:
 
     Personal(std::string name, unsigned int personalNumber, unsigned int salary);
 
+    // The destructor is usually not called manually, but implicitly (either by calling "delete" or leaving the scope)
+    ~Personal();
+
     /*
     // The compiler basically creates the following copy-constructor per default
     // If the parameter is marked with "const Personal&", this means that we have a reference to a const/immutable Personal
@@ -34,6 +45,8 @@ public:
      */
 
     /*
+    // In a move constructor, the parameter must not be const! We need to "take away" the arguments data,
+    // so that it doesn't contain any (or only partially) data
     // The compiler basically creates the following move-constructor per default
     Personal(Personal &&p) {
         name = p.name;
@@ -43,9 +56,7 @@ public:
     // If we write our own move-constructor, we might delete the option for a copy-constructor!
     Personal(const Personal &p) = delete;
      */
-
-    // In a move constructor, the parameter must not be const! We need to "take away" the arguments data,
-    // so that it doesn't contain any (or only partially) data
+    void initPersonal(std::string name = "", unsigned int personalNumber = 0, unsigned int salary = GG);
 
     const std::string &getName() const;
 

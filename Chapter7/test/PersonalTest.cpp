@@ -112,3 +112,44 @@ TEST(Personal, ShowingDifferenceBetweenNormalConstructorAndUnifiedInitialization
     // Personal person2{"Batman", 100.48, 1000};   // when passing a double, we get an error
     Personal person2{"Batman", static_cast<unsigned int>(100.48), 1000};    // We need to cast explicitly
 }
+
+TEST(Personal, InitPersonalSetsValuesCorrectly) {
+    // Arrange
+    PersonalData personalData = {"Batman", 100489, 2500};
+    std::string defaultName = "";
+    unsigned int defaultPersonalNumber = 0;
+    unsigned int defaultSalary = 1900;
+
+    // Act
+    Personal person1, person2;
+    person1.initPersonal(personalData.name, personalData.personalNumber, personalData.salary);
+    person2.initPersonal();
+
+    // Assert
+    expectPersonalContains(person1, personalData);
+    EXPECT_EQ(defaultName, person2.getName());
+    EXPECT_EQ(defaultPersonalNumber, person2.getPersonalNumber());
+    EXPECT_EQ(defaultSalary, person2.getSalary());
+}
+
+TEST(Personal, ShowDestructorFunctionality) {
+    GTEST_SKIP();
+    auto simple_function = [](){Personal person("simple function Batman");};
+    Personal *person1 = new Personal("new Batman");
+    static Personal person2("static Batman");   // Static objects are deleted after the completion of the "main" function
+    simple_function();
+    delete person1;
+    Personal person3("local Batman");
+    {
+        Personal person4("scope Batman");
+        std::unique_ptr<Personal> person5(new Personal("unique_ptr Batman"));
+    }
+    // person3.~Personal(); // Although this is possible, it leads to unexpected/undefined behaviour since the destructor is called multiple times!
+}
+
+TEST(Personal, ShowStructCanBeUsedAsClass) {
+    GTEST_SKIP();
+    PersonalStruct personalStruct;  // Since "struct" in C++ is a variant of "class", we don't need a typedef!
+    // personalStruct.privateInt;   // Not possible, since "privateInt" was declared private
+    personalStruct.publicInt;
+}

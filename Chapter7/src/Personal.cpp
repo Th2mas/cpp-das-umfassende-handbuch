@@ -1,6 +1,7 @@
 //
 // Created by tkhle on 19.02.2023.
 //
+#include <iostream>
 #include "../include/Personal.h"
 
 // We use the scope operator ::
@@ -21,6 +22,16 @@ Personal::Personal(std::string name, unsigned int personalNumber) : Personal(nam
 
 Personal::Personal(std::string name, unsigned int personalNumber, unsigned int salary)
         : name(name), personalNumber(personalNumber), salary(salary) {
+}
+
+Personal::~Personal() {
+    std::cout << "Deleted " << name << std::endl;
+}
+
+void Personal::initPersonal(std::string name, unsigned int personalNumber, unsigned int salary) {
+    this->name = name;
+    this->personalNumber = personalNumber;
+    this->salary = salary;
 }
 
 const std::string &Personal::getName() const {
