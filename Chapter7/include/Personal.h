@@ -13,9 +13,19 @@ struct PersonalStruct {
     int publicInt;
 private:
     int privateInt;
+public:
+    int publicInt2;
+private:
+    int privateInt2;
+protected:
+    int protectedInt;
 };
 
+// Class declaration: Class Clazz;
+// Class definition: Class Clazz { };
+
 class Personal {
+    // Per default, everything is private
     std::string name;
     unsigned int personalNumber;
     unsigned int salary;
@@ -43,9 +53,10 @@ public:
         salary = p.salary;
     }
      */
+    Personal(const Personal& p);
 
     /*
-    // In a move constructor, the parameter must not be const! We need to "take away" the arguments data,
+    // In a move constructor, the parameter must not be const! We need to "take away" the argument's data,
     // so that it doesn't contain any (or only partially) data
     // The compiler basically creates the following move-constructor per default
     Personal(Personal &&p) {
@@ -56,6 +67,8 @@ public:
     // If we write our own move-constructor, we might delete the option for a copy-constructor!
     Personal(const Personal &p) = delete;
      */
+    Personal(Personal &&p);
+
     void initPersonal(std::string name = "", unsigned int personalNumber = 0, unsigned int salary = GG);
 
     const std::string &getName() const;
@@ -63,6 +76,14 @@ public:
     unsigned int getPersonalNumber() const;
 
     unsigned int getSalary() const;
+
+    void setName(const std::string &name);
+
+    void setPersonalNumber(unsigned int personalNumber);
+
+    void setSalary(unsigned int salary);
+
+    std::string toString();
 };
 
 #endif //CHAPTER7_PERSONAL_H

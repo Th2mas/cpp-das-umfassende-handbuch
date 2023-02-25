@@ -2,6 +2,7 @@
 // Created by tkhle on 19.02.2023.
 //
 #include <gtest/gtest.h>
+#include <fmt/core.h>
 #include "../include/Personal.h"
 
 typedef struct PersonalData {
@@ -82,9 +83,14 @@ TEST(Personal, ShowMoveConstructorOperation) {
     expectPersonalContains(person02, {expectedName, expectedPersonalNumber, expectedSalary});
 
     // Default value of a string (which is an object) is an empty string, the rest (primitives) is not moved! This is the default implementation!
+    /*
     EXPECT_EQ(person01.getName(), "");
     EXPECT_EQ(person01.getPersonalNumber(), expectedPersonalNumber);
     EXPECT_EQ(person01.getSalary(), expectedSalary);
+    */
+    EXPECT_EQ(person01.getName(), "");
+    EXPECT_NE(person01.getPersonalNumber(), expectedPersonalNumber);
+    EXPECT_NE(person01.getSalary(), expectedSalary);
 }
 
 TEST(Personal, AvoidImplicitConversion) {
@@ -152,4 +158,21 @@ TEST(Personal, ShowStructCanBeUsedAsClass) {
     PersonalStruct personalStruct;  // Since "struct" in C++ is a variant of "class", we don't need a typedef!
     // personalStruct.privateInt;   // Not possible, since "privateInt" was declared private
     personalStruct.publicInt;
+}
+
+TEST(Personal, ToString) {
+    // Arrange
+    std::string name = "Batman";
+    unsigned int personalNumber = 1900;
+    unsigned int salary = 2800;
+    Personal personal{name, personalNumber, salary};
+
+    auto expected = fmt::format("Personal[name={}, personalNumber={}, salary={}]", name, personalNumber, salary);
+    // auto expected = std::format("Personal[name={}, personalNumber={}, salary={}]", name, personalNumber, salary);    // should work with C++20
+
+    // Act
+    auto actual = personal.toString();
+
+    // Assert
+    EXPECT_EQ(expected, actual);
 }

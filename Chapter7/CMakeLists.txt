@@ -9,6 +9,12 @@ FetchContent_Declare(
         URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.zip
 )
 FetchContent_MakeAvailable(googletest)
+FetchContent_Declare(
+        fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+        GIT_TAG master
+)
+FetchContent_MakeAvailable(fmt)
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
@@ -17,8 +23,8 @@ enable_testing()
 include(GoogleTest)
 
 set(HEADERS include/Personal.h)
-set(SOURCES src/Personal.cpp src/StructTypeDefTest.c)
+set(SOURCES src/Personal.cpp)
 set(TESTS test/PersonalTest.cpp)
 add_executable(Chapter7Test ${HEADERS} ${SOURCES} ${TESTS})
-target_link_libraries(Chapter7Test GTest::gtest_main GTest::gmock)
+target_link_libraries(Chapter7Test GTest::gtest_main GTest::gmock fmt::fmt)
 gtest_discover_tests(Chapter7Test)
