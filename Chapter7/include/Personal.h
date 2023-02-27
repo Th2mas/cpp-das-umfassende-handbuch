@@ -33,9 +33,13 @@ public:
     Personal();
 
     Personal(std::string name);
+
+    // We use "explicit" to avoid the implicit conversion of the parameter (e.g. convert a C string to a C++ string)
     // explicit Personal(std::string name);
 
-    // Personal(const char* name);  // if we want to convert our argument to another type, we might create a conversion constructor (in this case not needed, C strings are also valid C++ strings)
+    // if we want to convert our argument to another type, we might create a conversion constructor
+    // (in this case not needed, C strings are also valid C++ strings)
+    // Personal(const char* name);
 
     Personal(std::string name, unsigned int personalNumber);
 
@@ -71,6 +75,9 @@ public:
 
     void initPersonal(std::string name = "", unsigned int personalNumber = 0, unsigned int salary = GG);
 
+    // "const" at the end of a method declaration tells us, that we are not modifying any values in the getter (only read-access)
+    Personal compareSalary(const Personal &p) const;
+
     const std::string &getName() const;
 
     unsigned int getPersonalNumber() const;
@@ -84,6 +91,11 @@ public:
     void setSalary(unsigned int salary);
 
     std::string toString();
+
+    friend unsigned int multiplySalary(const Personal& p, unsigned int multiplier);
 };
+
+// Make multiplySalary a global function
+unsigned int multiplySalary(const Personal& p, unsigned int multiplier);
 
 #endif //CHAPTER7_PERSONAL_H

@@ -52,6 +52,13 @@ void Personal::initPersonal(std::string name, unsigned int personalNumber, unsig
     this->salary = salary;
 }
 
+Personal Personal::compareSalary(const Personal &p) const {
+    if (getSalary() > p.getSalary()) {
+        return *this;
+    }
+    return p;
+}
+
 const std::string &Personal::getName() const {
     return name;
 }

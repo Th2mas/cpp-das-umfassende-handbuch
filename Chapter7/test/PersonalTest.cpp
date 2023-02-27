@@ -176,3 +176,30 @@ TEST(Personal, ToString) {
     // Assert
     EXPECT_EQ(expected, actual);
 }
+
+TEST(Personal, CompareSalaryReturnsObjectWithHighestSalary) {
+    // Arrange
+    const Personal p1{"P1", 0, 2200};
+    const Personal p2{"P2", 1, 2300};
+
+    const Personal expected = p2;
+
+    // Act
+    auto actual = p1.compareSalary(p2);
+
+    // Assert
+    expectPersonalEquals(expected, actual);
+}
+
+TEST(Personal, FriendGlobalFunctionHasAccessToObjectPrivateProperties) {
+    // Arrange
+    unsigned int multiplier = 3;
+    const Personal p{"P1", 0, 2300};
+    const auto expected = p.getSalary() * multiplier;
+
+    // Act
+    const auto actual = multiplySalary(p, multiplier);
+
+    // Assert
+    EXPECT_EQ(expected, actual);
+}
