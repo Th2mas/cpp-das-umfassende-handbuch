@@ -46,6 +46,7 @@ public:
     Personal(std::string name, unsigned int personalNumber, unsigned int salary);
 
     // The destructor is usually not called manually, but implicitly (either by calling "delete" or leaving the scope)
+    // Note: The destructor is also called when an exception occurs!
     ~Personal();
 
     /*
