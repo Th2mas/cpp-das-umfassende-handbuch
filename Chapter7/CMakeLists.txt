@@ -22,7 +22,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 include(GoogleTest)
 
-set(HEADERS include/Personal.h include/OS.h include/Employee.h)
+set(HEADERS include/Personal.h include/OS.h include/Employee.h include/Window.h)
 set(SOURCES src/Personal.cpp src/PersonalFriend.cpp src/OS.cpp src/Employee.cpp)
 set(TESTS test/PersonalTest.cpp test/OSTest.cpp test/EmployeeTest.cpp)
 add_executable(Chapter7Test ${HEADERS} ${SOURCES} ${TESTS})

@@ -12,9 +12,11 @@ class Employee {
     // (or simple strings in this case)
     char* company;
     Personal person;
+    static unsigned int employeeCount;
 
     void assignCompanyAndPersonal(const char* company, const Personal& personal);
 public:
+
     Employee(const char* company, const Personal& personal);
     ~Employee();
 
@@ -23,6 +25,9 @@ public:
     Employee& operator=(const Employee& employee);
 
     char* getCompany();
+
+    // Note: We must not use "const" as an appendix of static methods -> not allowed, "static member function cannot have 'const' qualifier"
+    static unsigned int getEmployeeCount();
 };
 
 #endif //CHAPTER7_EMPLOYEE_H
