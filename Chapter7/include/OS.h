@@ -10,6 +10,7 @@ public:
     enum OSType { WIN, MAC, UNIX, LINUX };
 
     explicit OS(const unsigned int id);
+    OS() = default;
 
     void setOS(OSType t);
     OSType getOS() const;
