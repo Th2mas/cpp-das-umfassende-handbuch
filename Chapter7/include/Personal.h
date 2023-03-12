@@ -71,6 +71,11 @@ public:
     }
     // If we write our own move-constructor, we might delete the option for a copy-constructor!
     Personal(const Personal &p) = delete;
+
+     // To properly implement moving, you should follow the three steps:
+     // 1) Delete the content of the target value
+     // 2) Move the source value to the target
+     // 3) Set the source to a defined state
      */
     Personal(Personal &&p);
 
