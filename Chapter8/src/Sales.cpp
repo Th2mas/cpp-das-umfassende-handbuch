@@ -3,7 +3,7 @@
 //
 #include "../include/Sales.h"
 
-Sales Sales::operator+(const Sales& op2) const {
+Sales Sales::operator+(const Sales &op2) const {
     // Copy the current object to tmp
     Sales tmp(*this);
     tmp.paperback += op2.paperback;
@@ -11,8 +11,64 @@ Sales Sales::operator+(const Sales& op2) const {
     return tmp;
 }
 
-Sales Sales::operator+(unsigned int val) const {
+Sales Sales::operator + (unsigned int val) const {
     Sales tmp(*this);
     tmp.paperback += val;
     return tmp;
+}
+
+// Friend function, doesn't have a scope!
+Sales operator+(unsigned int val, const Sales& op2) {
+    Sales tmp(op2);
+    return tmp + val;
+}
+
+Sales& Sales::operator++() {
+    paperback++;
+    ebook++;
+    return *this;
+}
+
+Sales& Sales::operator--() {
+    if (paperback > 0 && ebook > 0) {
+        paperback--;
+        ebook--;
+    }
+    return *this;
+}
+
+// According to the book, it is better to implement it the following way (which is incorrect and makes the tests fail)
+/*
+Sales Sales::operator++(int) {
+    Sales tmp(*this);
+    tmp.paperback++;
+    tmp.ebook++;
+    return tmp;
+}
+
+Sales Sales::operator--(int) {
+    Sales tmp(*this);
+    if (tmp.paperback > 0 && tmp.ebook > 0) {
+        tmp.paperback--;
+        tmp.ebook--;
+    }
+    return tmp;
+}
+*/
+
+// We are implementing the postfix unary operator similarly like we did before
+Sales& Sales::operator++(int) {
+    return operator++();
+}
+
+Sales& Sales::operator--(int) {
+    return operator--();
+}
+
+unsigned int Sales::getPaperback() const {
+    return paperback;
+}
+
+unsigned int Sales::getEbook() const {
+    return ebook;
 }
