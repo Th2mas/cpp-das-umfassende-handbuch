@@ -129,3 +129,19 @@ TEST(Sales, UnaryPostfixDecrementWorks) {
     EXPECT_EQ(s.getPaperback(), originalPaperback - 1);
     EXPECT_EQ(s.getEbook(), originalEbook - 1);
 }
+
+TEST(Sales, UnaryNotAsFriendFunctionWorksAsExpected) {
+    // Arrange
+    unsigned int originalPaperback = 15;
+    unsigned int originalEbook = 10;
+    Sales notZero{originalPaperback, originalEbook};
+    Sales zero{0, 0};
+
+    // Act
+    auto isNotZeroEqualToZero = !notZero;
+    auto isZeroEqualToZero = !zero;
+
+    // Assert
+    EXPECT_FALSE(isNotZeroEqualToZero);
+    EXPECT_TRUE(isZeroEqualToZero);
+}

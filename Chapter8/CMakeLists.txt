@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(chapter7)
+project(chapter8)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -22,9 +22,9 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 include(GoogleTest)
 
-set(HEADERS include/Sales.h)
-set(SOURCES src/Sales.cpp)
-set(TESTS test/SalesTest.cpp)
-add_executable(Chapter7Test ${HEADERS} ${SOURCES} ${TESTS})
-target_link_libraries(Chapter7Test GTest::gtest_main GTest::gmock fmt::fmt)
-gtest_discover_tests(Chapter7Test)
+set(HEADERS include/Sales.h include/Dynamic.h)
+set(SOURCES src/Sales.cpp src/Dynamic.cpp)
+set(TESTS test/SalesTest.cpp test/DynamicTest.cpp)
+add_executable(Chapter8Test ${HEADERS} ${SOURCES} ${TESTS})
+target_link_libraries(Chapter8Test GTest::gtest_main GTest::gmock fmt::fmt)
+gtest_discover_tests(Chapter8Test)

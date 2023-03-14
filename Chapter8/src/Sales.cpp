@@ -23,6 +23,17 @@ Sales operator+(unsigned int val, const Sales& op2) {
     return tmp + val;
 }
 
+// We can implement this unary operator with the scope operator like this
+/*
+bool Sales::operator!() {
+    return paperback == 0 && ebook == 0;
+}
+ */
+// If we use it as a friend function, we simply omit the scope and add the reference as the parameter
+bool operator!(const Sales& op) {
+    return op.paperback == 0 && op.ebook == 0;
+}
+
 Sales& Sales::operator++() {
     paperback++;
     ebook++;
