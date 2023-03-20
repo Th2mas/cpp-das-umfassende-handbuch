@@ -145,3 +145,37 @@ TEST(Sales, UnaryNotAsFriendFunctionWorksAsExpected) {
     EXPECT_FALSE(isNotZeroEqualToZero);
     EXPECT_TRUE(isZeroEqualToZero);
 }
+
+TEST(Sales, AssignmentOperatorDoesNotCopyButRatherAssign) {
+    // Arrange
+    Sales s{100, 50};
+
+    // Act
+    Sales s2 = s;
+
+    // Assert
+    EXPECT_EQ(s.getPaperback(), s2.getPaperback());
+    EXPECT_EQ(s.getEbook(), s2.getEbook());
+}
+
+// It doesn't really make sense with unsigned int values...
+TEST(Sales, UnaryMinusInvertsAllValues) {
+    // Arrange
+    unsigned int paperback = 53;
+    unsigned int ebook = 28;
+    auto expectedPaperback = -paperback;
+    auto expectedEbook = -ebook;
+
+    Sales s{paperback, ebook};
+
+    // Act
+    auto s2 = -s;
+
+    // Assert
+    EXPECT_EQ(expectedPaperback, s2.getPaperback());
+    EXPECT_EQ(expectedEbook, s2.getEbook());
+}
+
+TEST(Sales, EqualityReturnsCorrectValue) {
+    // Arrange
+}

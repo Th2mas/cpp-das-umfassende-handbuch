@@ -19,7 +19,11 @@ public:
     Sales operator+(const Sales& op2) const;
     Sales operator + (unsigned int val) const;
 
-    // We need a free (friend) function to override binary operators (e.g. plus with an integer on the left side of the addition)
+    // The assignment operator can only be implemented as part of a class
+    // We should overload the assignment operator, if we have pointers or other resources in a class
+    Sales& operator=(const Sales& op2);
+
+    // We need a free (friend) function to override binary operators with an primitive type on the left side of the binary operator
     // The functions then don't belong to the class; we need to use both operands as parameters
     friend Sales operator+(unsigned int val, const Sales& op2);
 
@@ -42,6 +46,12 @@ public:
     // Instead, we are implementing it the same way we did in the prefix notation, just with the dummy operator
     Sales& operator++(int);
     Sales& operator--(int);
+
+    Sales operator-() const;
+
+    // non-member function (unfortunately) cannot have 'const' at the end!
+    friend bool operator==(const Sales& s1, const Sales& s2);
+    bool operator!=(const Sales& s2) const;
 
     unsigned int getPaperback() const;
 

@@ -76,6 +76,31 @@ Sales& Sales::operator--(int) {
     return operator--();
 }
 
+Sales& Sales::operator=(const Sales& op2) {
+    if (this == &op2) {
+        return *this;
+    }
+    paperback = op2.paperback;
+    ebook = op2.ebook;
+
+    return *this;
+}
+
+Sales Sales::operator-() const {
+    Sales tmp(*this);
+    tmp.paperback = -paperback;
+    tmp.ebook = -ebook;
+    return tmp;
+}
+
+bool operator==(const Sales& s1, const Sales& s2) {
+    return s1.paperback == s2.paperback && s1.ebook == s2.ebook;
+}
+
+bool Sales::operator!=(const Sales& s2) const {
+    return *this == s2;
+}
+
 unsigned int Sales::getPaperback() const {
     return paperback;
 }
