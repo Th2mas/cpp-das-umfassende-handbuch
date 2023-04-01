@@ -175,7 +175,3 @@ TEST(Sales, UnaryMinusInvertsAllValues) {
     EXPECT_EQ(expectedPaperback, s2.getPaperback());
     EXPECT_EQ(expectedEbook, s2.getEbook());
 }
-
-TEST(Sales, EqualityReturnsCorrectValue) {
-    // Arrange
-}
