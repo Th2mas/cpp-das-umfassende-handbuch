@@ -4,7 +4,7 @@
 #include "../include/Comparison.h"
 #include "gtest/gtest.h"
 
-class ComparisonLessThanFixture : public testing::TestWithParam<std::tuple<int, int, bool>> {
+class ComparisonLessThanFixture : public testing::TestWithParam<std::tuple<unsigned int, unsigned int, bool>> {
 };
 
 TEST_P(ComparisonLessThanFixture, LessThan) {
@@ -30,7 +30,7 @@ INSTANTIATE_TEST_SUITE_P(LessThanTests, ComparisonLessThanFixture, ::testing::Va
         std::make_tuple(3, 2, false)
 ));
 
-class ComparisonEqualsFixture : public testing::TestWithParam<std::tuple<int, int, bool>> {
+class ComparisonEqualsFixture : public testing::TestWithParam<std::tuple<unsigned int, unsigned int, bool>> {
 };
 
 TEST_P(ComparisonEqualsFixture, Equals) {
@@ -56,7 +56,7 @@ INSTANTIATE_TEST_SUITE_P(EqualsTests, ComparisonEqualsFixture, ::testing::Values
         std::make_tuple(3, 2, false)
 ));
 
-class ComparisonGreaterThanFixture : public testing::TestWithParam<std::tuple<int, int, bool>> {
+class ComparisonGreaterThanFixture : public testing::TestWithParam<std::tuple<unsigned int, unsigned int, bool>> {
 };
 
 TEST_P(ComparisonGreaterThanFixture, GreaterThan) {
@@ -81,3 +81,34 @@ INSTANTIATE_TEST_SUITE_P(GreaterThanTests, ComparisonGreaterThanFixture, ::testi
         std::make_tuple(2, 2, false),
         std::make_tuple(3, 2, true)
 ));
+
+TEST(Comparison, BoolCast) {
+    // Arrange
+    Comparison comp1{1};
+    bool expected1 = true;
+
+    Comparison comp2{0};
+    bool expected2 = false;
+
+    // Act
+    auto actual1 = (bool) comp1;
+
+    // Assert
+    EXPECT_EQ(expected1, actual1);
+    EXPECT_EQ(expected2, comp2);
+}
+
+TEST(Comparison, Functor) {
+    // Arrange
+    unsigned int value1 = 1;
+    unsigned int value2 = 2;
+    auto expected = value1 + value2;
+
+    Comparison c{value1};
+
+    // Act
+    auto actual = c(value2);
+
+    // Assert
+    EXPECT_EQ(expected, actual);
+}
