@@ -14,3 +14,11 @@ const std::string &Superhero::getPower() const {
 void Superhero::setPower(const std::string &power) {
     Superhero::power = power;
 }
+
+const std::string Superhero::toString() const {
+    return Hero::toString() + ", Power: " + power;
+}
+
+const std::string Superhero::type() {
+    return "Superhero";
+}

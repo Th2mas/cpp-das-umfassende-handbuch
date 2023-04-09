@@ -30,3 +30,11 @@ unsigned int Hero::getAge() const {
 void Hero::setAge(unsigned int age) {
     Hero::age = age;
 }
+
+const std::string Hero::toString() const {
+    return "Name: " + name + ", Age: " + std::to_string(age);
+}
+
+const std::string Hero::type() {
+    return "Hero";
+}

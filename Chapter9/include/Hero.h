@@ -7,6 +7,7 @@
 
 #include <string>
 
+// A non-virtual member function can not be overridden, but only be "re-declared"
 class Hero {
     std::string name;
     unsigned int age;
@@ -25,6 +26,12 @@ public:
     unsigned int getAge() const;
 
     void setAge(unsigned int age);
+
+    // Declare 'toString' to be virtual, so that it can be overridden in a child class
+    // This comes in-handy when using (multiple) polymorphism
+    virtual const std::string toString() const;
+
+    static const std::string type();
 };
 
 #endif //CHAPTER9_HERO_H

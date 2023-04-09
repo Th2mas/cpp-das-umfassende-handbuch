@@ -18,7 +18,7 @@ include(GoogleTest)
 
 set(HEADERS include/Hero.h include/Superhero.h)
 set(SOURCES src/Hero.cpp src/Superhero.cpp)
-set(TESTS test/SuperheroTests.cpp)
+set(TESTS test/SuperheroTests.cpp test/HeroTests.cpp)
 add_executable(Chapter9Test ${HEADERS} ${SOURCES} ${TESTS})
 target_link_libraries(Chapter9Test GTest::gtest_main GTest::gmock)
 gtest_discover_tests(Chapter9Test)
