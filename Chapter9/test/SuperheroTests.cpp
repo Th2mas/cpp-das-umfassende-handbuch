@@ -32,9 +32,49 @@ TEST(Superhero, ToString) {
     auto actual = batman.toString();
 
     // Assert
-    EXPECT_STREQ(expected.c_str(), actual.c_str());
+    EXPECT_EQ(expected, actual);
 }
 
 TEST(Superhero, NonVirtualMethodOverride) {
     EXPECT_STREQ("Superhero", Superhero::type().c_str());
+}
+
+TEST(Superhero, AccessToSuperClassMethodSameAsSuperClassCall) {
+    // Arrange
+    std::string name = "Batman";
+    unsigned int age = 40;
+    std::string power = "No power";
+
+    Hero noPowerBatman{name, age};
+    Superhero batmanWithPower{name, age, power};
+
+    // Act and assert
+    EXPECT_EQ(noPowerBatman.toString(), batmanWithPower.Hero::toString());
+}
+
+TEST(Superhero, UseDerivedConstructor) {
+    // Arrange
+    std::string name = "Batman";
+    unsigned int age = 40;
+
+    // Act
+    Superhero noPowerBatman{name, age};
+
+    // Assert
+    EXPECT_EQ(name, noPowerBatman.getName());
+    EXPECT_EQ(age, noPowerBatman.getAge());
+}
+
+TEST(Superhero, CallingVirtualMethodOnPointerCallsDerivedMethod) {
+    // Arrange
+    std::string name = "Batman";
+    unsigned int age = 40;
+    std::string power = "";
+    std::string expected = "Name: " + name + ", Age: " + std::to_string(age) + ", Power: " + power;
+
+    // Act
+    Hero *h = new Superhero(name, age);
+
+    // Assert
+    EXPECT_EQ(expected, h->toString());
 }

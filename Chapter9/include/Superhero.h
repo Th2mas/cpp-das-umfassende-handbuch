@@ -19,13 +19,22 @@
 class Superhero final : public Hero {
     std::string power;
 public:
+    // With constructors, the constructors of the super classes are called first; the derived class comes last
+    // With destructors, it is the other way around: The destructor of the derived class comes first, then the super class and so on
     Superhero(std::string name, unsigned int age, std::string power);
+
+    // Use all constructors from the parent class (it might not make much sense here, but this is how it works)
+    // We can not pass a subset of the constructors, but pass all of them (but the compiler generates code only for those
+    // that are actually used)
+    // Only the copy- and base constructor (no params) of the parent class are not derived
+    using Hero::Hero;
 
     const std::string &getPower() const;
 
     void setPower(const std::string &power);
 
     // Note: 'override' can only be used, if the original method is virtual
+    // This method is implicitly also virtual
     const std::string toString() const override;
 
     // A non-virtual method can not be annotated with override

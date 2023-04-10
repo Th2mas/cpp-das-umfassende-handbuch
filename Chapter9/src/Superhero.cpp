@@ -4,6 +4,7 @@
 #include "../include/Hero.h"
 #include "../include/Superhero.h"
 
+// We call the initializer of Hero "base initializer"
 Superhero::Superhero(std::string name, unsigned int age, std::string power): Hero(name, age), power(power) {
 }
 
