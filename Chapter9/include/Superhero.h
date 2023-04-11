@@ -29,6 +29,8 @@ public:
     // Only the copy- and base constructor (no params) of the parent class are not derived
     using Hero::Hero;
 
+    ~Superhero();
+
     const std::string &getPower() const;
 
     void setPower(const std::string &power);

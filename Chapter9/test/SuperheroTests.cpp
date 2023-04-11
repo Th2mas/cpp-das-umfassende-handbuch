@@ -73,8 +73,12 @@ TEST(Superhero, CallingVirtualMethodOnPointerCallsDerivedMethod) {
     std::string expected = "Name: " + name + ", Age: " + std::to_string(age) + ", Power: " + power;
 
     // Act
+    // We use pointers, so we can use dynamic binding! (similar to Java's "Hero h = new Superhero()")
     Hero *h = new Superhero(name, age);
 
     // Assert
     EXPECT_EQ(expected, h->toString());
+
+    // For checking which destructor is called (with a simple print) -> first superhero, then hero
+    delete h;
 }

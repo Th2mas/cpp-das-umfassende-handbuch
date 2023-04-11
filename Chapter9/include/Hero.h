@@ -18,6 +18,8 @@ public:
 
     Hero(std::string name, unsigned int age);
 
+    virtual ~Hero();
+
     // ClangTidy: Constructors with one parameter should be marked with "explicit" to avoid unintentional implicit conversions
     explicit Hero(std::string name);
 

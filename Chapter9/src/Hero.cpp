@@ -1,6 +1,7 @@
 //
 // Created by tkhle on 05.04.2023.
 //
+#include <iostream>
 #include "../include/Hero.h"
 
 const unsigned int defaultAge = 25;
@@ -14,6 +15,10 @@ Hero::Hero(std::string name) : Hero(name, defaultAge) {
 }
 
 Hero::Hero() : Hero("No name") {}
+
+Hero::~Hero() {
+    std::cout << "Destroying hero" << std::endl;
+}
 
 const std::string &Hero::getName() const {
     return name;
