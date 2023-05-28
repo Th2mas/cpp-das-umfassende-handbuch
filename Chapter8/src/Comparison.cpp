@@ -29,7 +29,6 @@ bool Comparison::operator>=(const Comparison &c) const {
 }
 
 std::istream& operator>>(std::istream& lop, Comparison& rop) {
-    // std::cout << "val";
     lop >> rop.val;
     return lop;
 }
