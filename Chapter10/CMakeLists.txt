@@ -16,7 +16,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 include(GoogleTest)
 
-set(HEADERS )
+set(HEADERS src/DivisionByZeroError.h)
 set(SOURCES )
 set(TESTS test/ExceptionHandlingTests.cpp)
 add_executable(Chapter10Test ${HEADERS} ${SOURCES} ${TESTS})
