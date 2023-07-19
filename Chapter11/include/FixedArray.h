@@ -7,7 +7,7 @@
 
 #include <stdexcept>
 
-template <typename T, int n = 1>
+template <typename T = int, int n = 1>
 class FixedArray {
     T data[n]{0};   // creates n elements
 public:
@@ -24,5 +24,8 @@ public:
         return n;
     }
 };
+
+template <int n>
+using IntFixedArray = FixedArray<int, n>;
 
 #endif //CHAPTER11_FIXEDARRAY_H

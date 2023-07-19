@@ -21,6 +21,15 @@ public:
     U second() const {
         return s;
     }
+
+    bool operator==(Pair<T, U>& other) const {
+        return f == other.f && s == other.s;
+    }
 };
+
+template <typename T, typename U = T>
+bool comparePairs(Pair<T, U>& p1, Pair<T, U>& p2) {
+    return p1.first() == p2.first() && p1.second() == p2.second();
+}
 
 #endif //CHAPTER11_PAIR_H

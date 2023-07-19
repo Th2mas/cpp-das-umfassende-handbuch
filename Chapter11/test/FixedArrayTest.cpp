@@ -56,6 +56,36 @@ TEST(FixedArray, CorrectIndexUsageWithoutNonTypeDefinition) {
     }
 }
 
+TEST(FixedArray, CorrectIndexUsageWithoutNonTypeDefinitionAndWithDefaultTemplateParameter) {
+    // Arrange
+    FixedArray<> fa;
+    FixedArray fa2;
+
+    // Act and assert
+    try {
+        fa[0] = 0;
+        fa2[0] = 0;
+    } catch (std::out_of_range& e) {
+        FAIL();
+    }
+
+    try {
+        fa[-1] = -1;
+        fa2[-1] = -1;
+        FAIL();
+    } catch (std::out_of_range& e) {
+        EXPECT_STREQ(e.what(), "FixedArray:IndexOutOfBounds");
+    }
+
+    try {
+        fa[1] = 1;
+        fa2[1] = 1;
+        FAIL();
+    } catch (std::out_of_range& e) {
+        EXPECT_STREQ(e.what(), "FixedArray:IndexOutOfBounds");
+    }
+}
+
 TEST(FixedArray, Size) {
     // Arrange
     const int expected = 3;
@@ -66,4 +96,30 @@ TEST(FixedArray, Size) {
 
     // Assert
     EXPECT_EQ(expected, actual);
+}
+
+TEST(IntFixedArray, CorrectIndexUsageWithNonTypeDefinition) {
+    // Arrange
+    IntFixedArray<10> ifa;
+
+    // Act and assert
+    try {
+        ifa[0] = 0;
+    } catch (std::out_of_range& e) {
+        FAIL();
+    }
+
+    try {
+        ifa[-1] = -1;
+        FAIL();
+    } catch (std::out_of_range& e) {
+        EXPECT_STREQ(e.what(), "FixedArray:IndexOutOfBounds");
+    }
+
+    try {
+        ifa[10] = 1;
+        FAIL();
+    } catch (std::out_of_range& e) {
+        EXPECT_STREQ(e.what(), "FixedArray:IndexOutOfBounds");
+    }
 }
