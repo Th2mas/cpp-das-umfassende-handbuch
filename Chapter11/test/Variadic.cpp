@@ -7,7 +7,7 @@
 TEST(Variadic, PrintValus) {
     // Arrange
     std::stringstream output;
-    std::streambuf* originalCoutBuffer = std::cout.rdbuf();
+    std::streambuf *originalCoutBuffer = std::cout.rdbuf();
     std::cout.rdbuf(output.rdbuf());  // Redirect cout to a stringstream
 
     // Act
@@ -23,4 +23,25 @@ TEST(Variadic, PrintValus) {
 TEST(Variadic, Sum) {
     auto result = sum(1.5, 2, 3, 5.6, 5, 6);
     EXPECT_DOUBLE_EQ(result, 23.1);
+}
+
+TEST(Variadic, SizeOf) {
+    // Arrange
+    int expected = 5;
+
+    // Act
+    int actual = countArgs(1, 2, 3, 4, 5);
+
+    // Assert
+    EXPECT_EQ(expected, actual);
+}
+
+TEST(Variadic, ToTuple) {
+    auto tuple = toTuple(1, 2, 3, 4, 5);
+
+    EXPECT_EQ(std::get<0>(tuple), 1);
+    EXPECT_EQ(std::get<1>(tuple), 2);
+    EXPECT_EQ(std::get<2>(tuple), 3);
+    EXPECT_EQ(std::get<3>(tuple), 4);
+    EXPECT_EQ(std::get<4>(tuple), 5);
 }

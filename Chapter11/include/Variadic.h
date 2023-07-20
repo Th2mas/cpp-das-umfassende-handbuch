@@ -29,4 +29,14 @@ double sum(const T& t, const U& ... args) {
     return t + sum(args ...);
 }
 
+template <typename ... Args>
+auto countArgs(Args ... args) -> int {
+    return (sizeof ... (args));
+}
+
+template <typename ... Args>
+auto toTuple(Args ... args) -> decltype(std::make_tuple(args...)) {
+    return std::make_tuple(args...);
+}
+
 #endif //CHAPTER11_VARIADIC_H
