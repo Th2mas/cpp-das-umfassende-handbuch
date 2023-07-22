@@ -18,7 +18,7 @@ include(GoogleTest)
 
 set(HEADERS include/RawFind.h)
 set(SOURCES )
-set(TESTS test/RawFindTest.cpp)
+set(TESTS test/RawFindTest.cpp test/SequentialContainerTest.cpp)
 add_executable(Chapter12Test ${HEADERS} ${SOURCES} ${TESTS})
 target_link_libraries(Chapter12Test GTest::gtest_main GTest::gmock)
 gtest_discover_tests(Chapter12Test)
